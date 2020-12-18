@@ -21,7 +21,8 @@
             ],
             "styles": [],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "@nrwl/react/plugins/webpack",
+            "buildLibsFromSource": true
           },
           "configurations": {
             "production": {
@@ -60,22 +61,26 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "config": "apps/website/.eslintrc",
-            "tsConfig": [
-              "apps/website/tsconfig.app.json",
-              "apps/website/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/website/**"]
+            "lintFilePatterns": [
+              "apps/website/**/*.js",
+              "apps/website/**/*.jsx",
+              "apps/website/**/*.ts",
+              "apps/website/**/*.tsx",
+              "apps/website/**/*.spec.ts",
+              "apps/website/**/*.spec.tsx",
+              "apps/website/**/*.spec.js",
+              "apps/website/**/*.spec.jsx",
+              "apps/website/**/*.d.ts"
+            ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/website/jest.config.js",
-            "tsConfig": "apps/website/tsconfig.spec.json"
+            "passWithNoTests": true
           }
         }
       }
@@ -99,12 +104,111 @@
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "linter": "eslint",
-            "config": "apps/website-e2e/.eslintrc",
-            "tsConfig": ["apps/website-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/website-e2e/**"]
+            "lintFilePatterns": [
+              "apps/website-e2e/src/**/*.ts",
+              "apps/website-e2e/src/**/*.js"
+            ]
+          }
+        }
+      }
+    },
+    "advanced-search": {
+      "root": "apps/advanced-search",
+      "sourceRoot": "apps/advanced-search/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/advanced-search",
+            "index": "apps/advanced-search/src/index.html",
+            "main": "apps/advanced-search/src/main.js",
+            "polyfills": "apps/advanced-search/src/polyfills.js",
+            "tsConfig": "apps/advanced-search/tsconfig.app.json",
+            "assets": [
+              "apps/advanced-search/src/favicon.ico",
+              "apps/advanced-search/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/advanced-search/src/environments/environment.js",
+                  "with": "apps/advanced-search/src/environments/environment.prod.js"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "advanced-search:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "advanced-search:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/advanced-search/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/advanced-search/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "advanced-search-e2e": {
+      "root": "apps/advanced-search-e2e",
+      "sourceRoot": "apps/advanced-search-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/advanced-search-e2e/cypress.json",
+            "tsConfig": "apps/advanced-search-e2e/tsconfig.e2e.json",
+            "devServerTarget": "advanced-search:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "advanced-search:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/advanced-search-e2e/**/*.js"]
           }
         }
       }
