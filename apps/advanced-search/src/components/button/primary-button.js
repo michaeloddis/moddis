@@ -48,61 +48,6 @@ const PrimaryButton = (props) => {
         onClick: onClickHandler
     };
 
-    /*
-    const renderChildren = () => {
-        const newChildren = [];
-    
-        if (Array.isArray(children)) {
-            let textIsPresent = false;
-            let textFound = false;
-    
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i];
-    
-                if (typeof child === 'string' && child !== '') {
-                    textIsPresent = true;
-                    break;
-                }
-            }
-
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i];
-    
-                if (child === null) {
-                    continue;
-                }
-    
-                if (typeof child === 'object') {
-                    const propsToAdd = {
-                        key: `buttonIconKey${i}`,
-                        size: 0,
-                        disabled: disabled
-                    };
-    
-                    if (!textFound && textIsPresent) {
-                        propsToAdd.marginright = rems('4');
-                    }
-    
-                    if (textFound && textIsPresent) {
-                        propsToAdd.marginleft = rems('4');
-                    }
-    
-                    newChildren.push(React.cloneElement(child, propsToAdd));
-    
-                    continue;
-                }
-    
-                newChildren.push(<span key={`buttonIconKey${i}`}>{child}</span>);
-                textFound = true;
-            }
-    
-            return newChildren;
-        }
-    
-        return children;
-    }
-    */
-
     return (
         <ButtonElement { ...buttonProps }>
             {children}
