@@ -1,82 +1,75 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { rems } from '../components/utils';
 import {
   ApplicationView,
   ApplicationTitle,
   ApplicationHeader,
   ApplicationContent,
-  ApplicationFooter
+  ApplicationFooter,
 } from '../components/application';
-import { Select } from '../components/select';
-import { Box } from '../components/layout';
 import { Search, SearchFilterRow } from '../components/search';
-import { TextInput } from '../components/text-input';
-import { PrimaryButton, SecondaryButton, IconButton, SearchIcon } from '../components/button';
-import { predicates, stringOperators } from '../components/filter-options';
-import { FaTimes } from "react-icons/fa";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  SearchIcon,
+} from '../components/button';
+import {
+  APPLICATION_TITLE,
+  SEARCH_BUTTON_LABEL,
+  RESET_BUTTON_LABEL,
+  ADD_BUTTON_LABEL,
+} from '../components/constants';
+
+// import { ApplicationView } from '@moddis/components/application-view';
+
+const applicationModel = {
+  searchFilterRowItems: [<SearchFilterRow key="row1" />],
+};
+
+const ApplicationContext = React.createContext(applicationModel);
 
 export const App = () => {
+  const context = useContext(ApplicationContext);
+
+  const addSearchFilterRow = () => {
+    context.searchFilterRowItems.push(<SearchFilterRow key="row2" />);
+  };
+
+  const searchHandler = () => {
+    console.log('Applying search filter!');
+  };
+
+  const resetHandler = () => {
+    console.log('Resetting search filter!');
+  };
+
+  const renderSearchFilterRows = () => {
+    return context.searchFilterRowItems;
+  };
+
   return (
-    <ApplicationView>
+    <ApplicationContext.Provider>
+      <ApplicationView>
         <ApplicationHeader>
-          <ApplicationTitle>Search for Sessions</ApplicationTitle>
+          <ApplicationTitle>{APPLICATION_TITLE}</ApplicationTitle>
         </ApplicationHeader>
         <ApplicationContent>
-          <Search>
-            <SearchFilterRow>
-              <Box padding={rems('4')}>
-                <IconButton>
-                  <FaTimes />
-                </IconButton>
-              </Box>
-              <Box padding={rems('4')}>
-                <Select
-                  minWidth={rems('250')}
-                  options={predicates} />
-              </Box>
-              <Box padding={rems('4')}>
-                <Select
-                  options={stringOperators} />
-              </Box>
-              <Box padding={rems('4')}>
-                <TextInput
-                  placeholder='domain.com' 
-                  name='domain' 
-                  value='' />
-              </Box>
-            </SearchFilterRow>
-            <SearchFilterRow>
-              <Box padding={rems('4')}>
-                <IconButton>
-                  <FaTimes />
-                </IconButton>
-              </Box>
-              <Box padding={rems('4')}>
-                <Select
-                  minWidth={rems('250')}
-                  options={predicates} />
-              </Box>
-              <Box padding={rems('4')}>
-                <Select
-                  options={stringOperators} />
-              </Box>
-              <Box padding={rems('4')}>
-                <TextInput
-                  placeholder='domain.com' 
-                  name='domain' 
-                  value='' />
-              </Box>
-            </SearchFilterRow>
-          </Search>
-        </ApplicationContent>
-        <ApplicationFooter>
-          <PrimaryButton>
-            <SearchIcon />
-            Search
+          <Search>{renderSearchFilterRows()}</Search>
+          <PrimaryButton width={rems('30')} onClick={addSearchFilterRow}>
+            {ADD_BUTTON_LABEL}
           </PrimaryButton>
-          <SecondaryButton>Reset</SecondaryButton>
+        </ApplicationContent>
+        <ApplicationFooter marginTop={rems('16')}>
+          <PrimaryButton onClick={searchHandler}>
+            <SearchIcon />
+            {SEARCH_BUTTON_LABEL}
+          </PrimaryButton>
+          <SecondaryButton onClick={resetHandler}>
+            {RESET_BUTTON_LABEL}
+          </SecondaryButton>
         </ApplicationFooter>
-    </ApplicationView>
+      </ApplicationView>
+    </ApplicationContext.Provider>
   );
 };
 export default App;

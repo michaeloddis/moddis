@@ -1,40 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Flex } from './flex';
+import { Box } from './box';
 
-const FlexContainer = styled.div`
-    box-sizing: border-box;
+const Container = styled.div`
     align-items: ${props => props.alignItems};
+    box-sizing: border-box;
     color: ${props => props.color};
     display: flex;
-    flex-direction:  ${props => props.flexDirection};
+    flex-direction: 'column';
     flex-wrap: ${props => props.flexWrap};
+    flexGrow: ${props => props.flexGrow};
     height: ${props => props.height};
     justify-content: ${props => props.justifyContent};
     margin: ${props => props.margin};
-    margin-left: ${props => props.marginLeft};
-    margin-right: ${props => props.marginRight};
-    margin-top: ${props => props.marginTop};
-    margin-bottom: ${props => props.marginBottom};
+    marginLeft: ${props => props.marginLeft};
+    marginRight: ${props => props.marginRight};
+    marginTop: ${props => props.marginTop};
+    marginBottom: ${props => props.marginBottom};
     overflow: ${props => props.overflow};
     padding: ${props => props.padding};
-    padding-left: ${props => props.paddingLeft};
-    padding-right: ${props => props.paddingRight};
-    padding-top: ${props => props.paddingTop};
-    padding-bottom: ${props => props.paddingBottom};
+    paddingLeft: ${props => props.paddingLeft};
+    paddingRight: ${props => props.paddingRight};
+    paddingTop: ${props => props.paddingTop};
+    paddingBottom: ${props => props.paddingBottom};
     width: ${props => props.width};
     order: ${props => props.order};
 `;
 
-const Flex = (props) => {
+const VStack = (props) => {
+    const renderChildren = () => {
+        let childElements = [];
+
+        if (props.children) {
+            childElements = props.children.map((item, index) => {
+                return (
+                    <Box key={index}>
+                        {item}
+                    </Box>
+                )
+            })
+        }
+
+        return childElements;
+    };
+
     return (
-        <FlexContainer { ...props }>
-            {props.children}
-        </FlexContainer>
+        <Container { ...props }>
+            {renderChildren()}
+        </Container>
     )
 };
 
-Flex.propTypes = {
+VStack.propTypes = {
     alignItems: PropTypes.string,
     children: PropTypes.any,
     color: PropTypes.string,
@@ -55,7 +74,6 @@ Flex.propTypes = {
     paddingRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     paddingTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     paddingBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    
     pointerEvents: PropTypes.string,
     width: PropTypes.string
 };
@@ -65,7 +83,6 @@ Flex.defaultProps = {
     alignContent: 'flex-start',
     alignSelf: 'auto',
     color: '#333333',
-    flexDirection: 'row',
     flexGrow: 0,
     flexWrap: 'wrap',
     height: 'auto',
@@ -79,5 +96,5 @@ Flex.defaultProps = {
 };
 
 export {
-    Flex
+    VStack
 };
