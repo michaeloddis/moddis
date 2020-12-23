@@ -25,6 +25,9 @@
     "advanced-search-e2e": {
       "tags": [],
       "implicitDependencies": ["advanced-search"]
+    },
+    "advanced-search-lib": {
+      "tags": []
     }
   },
   "tasksRunnerOptions": {

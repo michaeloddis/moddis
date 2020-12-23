@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@moddis/advanced-search-lib": ["libs/advanced-search-lib/src/index.js"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

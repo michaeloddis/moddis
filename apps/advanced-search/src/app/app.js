@@ -1,29 +1,37 @@
 import React, { useContext } from 'react';
-import { rems } from '../components/utils';
-import {
-  ApplicationView,
-  ApplicationTitle,
-  ApplicationHeader,
-  ApplicationContent,
-  ApplicationFooter,
-} from '../components/application';
-import { Search, SearchFilterRow } from '../components/search';
-import {
-  PrimaryButton,
-  SecondaryButton,
-  SearchIcon,
-} from '../components/button';
 import {
   APPLICATION_TITLE,
   SEARCH_BUTTON_LABEL,
   RESET_BUTTON_LABEL,
   ADD_BUTTON_LABEL,
-} from '../components/constants';
-
-// import { ApplicationView } from '@moddis/components/application-view';
+} from './components/constants';
+import {
+    predicates,
+    stringOperators,
+    numberOperators
+} from './components/filter-options';
+import {
+  rems,
+  ApplicationView,
+  ApplicationTitle,
+  ApplicationHeader,
+  ApplicationContent,
+  ApplicationFooter,
+  PrimaryButton,
+  SecondaryButton,
+  SearchIcon,
+  Search,
+  SearchFilterRow
+} from '@moddis/advanced-search-lib';
 
 const applicationModel = {
-  searchFilterRowItems: [<SearchFilterRow key="row1" />],
+  searchFilterRowItems: [
+    <SearchFilterRow 
+      key="row1"
+      predicates={predicates}
+      stringOperators={stringOperators}
+      numberOperators={numberOperators} />
+  ]
 };
 
 const ApplicationContext = React.createContext(applicationModel);
@@ -32,7 +40,7 @@ export const App = () => {
   const context = useContext(ApplicationContext);
 
   const addSearchFilterRow = () => {
-    context.searchFilterRowItems.push(<SearchFilterRow key="row2" />);
+    console.log('Adding new search filter!');
   };
 
   const searchHandler = () => {
