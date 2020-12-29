@@ -75,7 +75,7 @@ Flex.defaultProps = {
     overflow: 'visible',
     padding: '0px',
     pointerEvents: 'auto',
-    width: '100%'
+    width: 'auto'
 };
 
 export {

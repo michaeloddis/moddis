@@ -7,15 +7,13 @@ const ButtonElement = styled.button`
     background-color: #40a7f0;
     border: solid 1px #40a7f0;
     border-radius: 4px;
-    height: ${rems('35')};
-    width: ${props => props.width || rems('100')};
-    min-width: ${rems('60')};
     box-sizing: border-box;
     color: #FFFFFF;
-    padding-left: ${rems('16')};
-    padding-right: ${rems('16')};
-    margin-right: ${props => props.marginRight};
     cursor: pointer;
+    font-size: ${rems('16')};
+    height: ${rems('45')};
+    margin-right: ${props => props.marginRight};
+    width: ${props => props.width};
 
     :hover {
         background-color: #3485be;
@@ -34,25 +32,18 @@ const PrimaryButton = (props) => {
         onClick
     } = props;
 
-    const onClickHandler = () => {
-        if (onClick) {
-            onClick();
-        }
-    };
-
     const buttonProps = {
         name,
         value,
         width,
         type,
         marginRight,
-        disabled
+        disabled,
+        onClick
     };
 
     return (
-        <ButtonElement
-            onClick={onClickHandler} 
-            { ...buttonProps }>
+        <ButtonElement { ...buttonProps }>
             {children}
         </ButtonElement>
     );
@@ -69,7 +60,6 @@ PrimaryButton.propTypes = {
 
 PrimaryButton.defaultProps = {
     type: 'button',
-    marginRight: rems('16'),
     disabled: false
 };
 

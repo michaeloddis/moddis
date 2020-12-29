@@ -15,7 +15,10 @@ const ApplicationFooter = (props) => {
         marginLeft,
         marginRight,
         marginTop,
-        marginBottom
+        marginBottom,
+        borderTopStyle,
+        borderTopColor,
+        borderTopWidth
     } = props;
 
     const boxProps = {
@@ -30,11 +33,14 @@ const ApplicationFooter = (props) => {
         marginLeft,
         marginRight,
         marginTop,
-        marginBottom
+        marginBottom,
+        borderTopStyle,
+        borderTopColor,
+        borderTopWidth
     };
  
     return (
-        <Box { ...boxProps }>
+        <Box id='application-footer' { ...boxProps }>
             {children}
         </Box>
     );
@@ -43,6 +49,9 @@ const ApplicationFooter = (props) => {
 ApplicationFooter.propTypes = {
     width: PropTypes.string,
     children: PropTypes.any,
+    borderTopStyle: PropTypes.string,
+    borderTopColor: PropTypes.string,
+    borderTopWidth: PropTypes.string,
     padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     paddingLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     paddingRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -52,11 +61,14 @@ ApplicationFooter.propTypes = {
     marginLeft: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     marginRight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     marginTop: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    marginBottom: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 ApplicationFooter.defaultProps = {
-    width: '100%'
+    width: '100%',
+    borderTopStyle: 'solid',
+    borderTopColor: '#cccccc',
+    borderTopWidth: '1px'
 };
 
 export {

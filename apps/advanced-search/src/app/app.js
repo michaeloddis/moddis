@@ -1,83 +1,151 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
-  APPLICATION_TITLE,
-  SEARCH_BUTTON_LABEL,
-  RESET_BUTTON_LABEL,
-  ADD_BUTTON_LABEL,
-} from './components/constants';
-import {
+    ApplicationTitle,
+    ApplicationHeader,
+    ApplicationContent,
+    ApplicationFooter,
+    ApplicationSql,
+    PrimaryButton,
+    SecondaryButton,
+    SearchIcon,
+    SearchFilterTray,
+    SearchFilterRow,
+    Flex,
+    Box,
+
+    // Utils
+    rems,
+
+    // Constants
+    APPLICATION_TITLE,
+    SEARCH_BUTTON_LABEL,
+    RESET_BUTTON_LABEL,
+    ADD_BUTTON_LABEL,
+
+    // Data
     predicates,
     stringOperators,
-    numberOperators
-} from './components/filter-options';
-import {
-  rems,
-  ApplicationView,
-  ApplicationTitle,
-  ApplicationHeader,
-  ApplicationContent,
-  ApplicationFooter,
-  PrimaryButton,
-  SecondaryButton,
-  SearchIcon,
-  Search,
-  SearchFilterRow
+    numberOperators,
+    filters,
+    defaultRowFilter,
+
+    // Hooks
+    useFilterManager
 } from '@moddis/advanced-search-lib';
 
-const applicationModel = {
-  searchFilterRowItems: [
-    <SearchFilterRow 
-      key="row1"
-      predicates={predicates}
-      stringOperators={stringOperators}
-      numberOperators={numberOperators} />
-  ]
-};
-
-const ApplicationContext = React.createContext(applicationModel);
-
 export const App = () => {
-  const context = useContext(ApplicationContext);
+    const {
+        state,
+        addFilterRow,
+        removeFilterRow,
+        filterRowCount,
+        resetFilters,
+        predicateChanged,
+        operatorChanged,
+    } = useFilterManager({
+        initialState: filters
+    });
 
-  const addSearchFilterRow = () => {
-    console.log('Adding new search filter!');
-  };
+    console.log('In App with filters = ', state);
 
-  const searchHandler = () => {
-    console.log('Applying search filter!');
-  };
+    const addFilterRowHandler = () => {
+        addFilterRow({
+            id: filterRowCount + 1,
+            predicate: {
+                label: 'Domain',
+                value: 'domain',
+                type: 'string',
+                placeholder: 'domain.com'
+            },
+            operator: {
+                label: 'equals',
+                value: 'equals',
+                sqlOperator: '='
+            },
+            value: ''
+        });
+    };
 
-  const resetHandler = () => {
-    console.log('Resetting search filter!');
-  };
+    const searchHandler = () => {
+        console.log('Applying search filter!');
+    };
 
-  const renderSearchFilterRows = () => {
-    return context.searchFilterRowItems;
-  };
+    const deleteHandler = (item) => {
+        if (filterRowCount === 1) {
+            resetFilters();
+        } else {
+            removeFilterRow(item);
+        }
+    };
 
-  return (
-    <ApplicationContext.Provider>
-      <ApplicationView>
-        <ApplicationHeader>
-          <ApplicationTitle>{APPLICATION_TITLE}</ApplicationTitle>
-        </ApplicationHeader>
-        <ApplicationContent>
-          <Search>{renderSearchFilterRows()}</Search>
-          <PrimaryButton width={rems('30')} onClick={addSearchFilterRow}>
-            {ADD_BUTTON_LABEL}
-          </PrimaryButton>
-        </ApplicationContent>
-        <ApplicationFooter marginTop={rems('16')}>
-          <PrimaryButton onClick={searchHandler}>
-            <SearchIcon />
-            {SEARCH_BUTTON_LABEL}
-          </PrimaryButton>
-          <SecondaryButton onClick={resetHandler}>
-            {RESET_BUTTON_LABEL}
-          </SecondaryButton>
-        </ApplicationFooter>
-      </ApplicationView>
-    </ApplicationContext.Provider>
-  );
+    const resetHandler = () => {
+        resetFilters();
+    };
+
+    const renderSearchFilterRows = () => {
+        console.log('In renderSearchFilterRows() with state = ', state);
+
+        return state.map((item, index) => {
+            console.log('item = ', item);
+
+            return (
+                <SearchFilterRow 
+                    key={index}
+                    rowItem={item}
+                    selectedPredicate={item.predicate || defaultRowFilter.predicate}
+                    selectedOperator={item.operator || defaultRowFilter.operator}
+                    predicates={predicates}
+                    stringOperators={stringOperators}
+                    numberOperators={numberOperators}
+                    onDelete={deleteHandler}
+                    onPredicateChange={predicateChanged}
+                    onOperatorChange={operatorChanged} />
+            )
+        });
+    };
+
+    return (
+        <ApplicationView>
+            <ApplicationHeader>
+                <ApplicationTitle>
+                    {APPLICATION_TITLE}
+                </ApplicationTitle>
+            </ApplicationHeader>
+            <ApplicationContent>
+                <SearchFilterTray>
+                    {renderSearchFilterRows()}
+                </SearchFilterTray>
+                <PrimaryButton
+                    width={rems('60')}
+                    onClick={addFilterRowHandler}>
+                    {ADD_BUTTON_LABEL}
+                </PrimaryButton>
+            </ApplicationContent>
+            <ApplicationFooter
+                marginTop={rems('64')}
+                paddingTop={rems('16')}>
+                <Flex 
+                    flexDirection='column' 
+                    width='100%'>
+                    <Box>
+                        <PrimaryButton
+                            width={rems('140')}
+                            marginRight={rems('16')}
+                            onClick={searchHandler}>
+                            <SearchIcon />
+                            {SEARCH_BUTTON_LABEL}
+                        </PrimaryButton>
+                        <SecondaryButton
+                            onClick={resetHandler}>
+                            {RESET_BUTTON_LABEL}
+                        </SecondaryButton>
+                    </Box>
+                    <Box width='100%'>
+                        <ApplicationSql width='100%' />
+                    </Box>
+                </Flex>
+            </ApplicationFooter>
+        </ApplicationView>
+    );
 };
 export default App;

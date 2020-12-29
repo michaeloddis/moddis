@@ -8,6 +8,10 @@ const IconWrapper = styled.div`
     padding-right: ${props => props.paddingRight};
     display: inline-block;
     cursor: pointer;
+    border: solid 0px #ffffff;
+    margin-top: -2px;
+    width: 16px;
+    height: 16px;
 `;
 
 const SearchIcon = (props) => {

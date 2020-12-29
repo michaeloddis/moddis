@@ -54,11 +54,18 @@ const Select = (props) => {
         onToggleMenu,
         onChange,
         width,
-        minWidth
+        minWidth,
+        selectedItem
     } = props;
+
+    // const initialSelectedOption = selectedItem || options[0];
+
+    // console.log('initialSelectedOption', initialSelectedOption);
 
     const [ isListOpen, setIsListOpen ] = useState(false);
     const [ selectedOption, setSelectedOption ] = useState(options[0]);
+
+    console.log('selectedOption', selectedOption);
     
     useEffect(() => {
         if (isListOpen) {
@@ -67,7 +74,11 @@ const Select = (props) => {
                 document.removeEventListener('click', closeMenu);
             };
         }
-    });
+
+        if (selectedItem) {
+            setSelectedOption(selectedItem);
+        }
+    }, [isListOpen, selectedItem]);
 
     const closeMenu = () => {
         setIsListOpen(false);
@@ -112,6 +123,8 @@ const Select = (props) => {
         width,
         minWidth
     }
+
+    console.log('BEFORE RETURN::selectedOption', selectedOption);
  
     return (
         <SelectContainer
@@ -135,7 +148,8 @@ Select.propTypes = {
     onToggleMenu: PropTypes.string,
     minWidth: PropTypes.string,
     width: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    selectedItem: PropTypes.object
 };
 
 Select.defaultProps = {

@@ -7,8 +7,9 @@ const ButtonElement = styled.button`
     background-color: #a8b5c6;
     border: solid 1px #a8b5c6;
     border-radius: 4px;
-    height: ${rems('35')};
+    height: ${rems('45')};
     width: ${rems('100')};
+    font-size: ${rems('16')};
     min-width: ${rems('60')};
     box-sizing: border-box;
     color: #FFFFFF;
@@ -35,12 +36,6 @@ const SecondaryButton = (props) => {
         disabled
     } = props;
 
-    const onClickHandler = () => {
-        if (onClick) {
-            onClick();
-        }
-    };
-
     const buttonProps = {
         name,
         value,
@@ -48,13 +43,12 @@ const SecondaryButton = (props) => {
         minWidth,
         type,
         marginRight,
-        disabled
+        disabled,
+        onClick
     };
 
     return (
-        <ButtonElement
-            onClick={onClickHandler} 
-            { ...buttonProps }>
+        <ButtonElement { ...buttonProps }>
             {children}
         </ButtonElement>
     );
@@ -72,7 +66,6 @@ SecondaryButton.propTypes = {
 SecondaryButton.defaultProps = {
     width: '100%',
     type: 'button',
-    marginRight: rems('16'),
     disabled: false
 };
 

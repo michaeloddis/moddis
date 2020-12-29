@@ -15,7 +15,7 @@ const ApplicationTitle = (props) => {
     const { width, children } = props;
  
     return (
-        <ApplicationTitleContainer width={width}>
+        <ApplicationTitleContainer id='application-title' width={width}>
             {children}
         </ApplicationTitleContainer>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Flex } from '../layout';
 
-const Search = (props) => {
+const SearchFilterTray = (props) => {
     return (
         <Flex
             flexDirection='column'
@@ -13,15 +13,15 @@ const Search = (props) => {
     );
 };
 
-Search.propTypes = {
+SearchFilterTray.propTypes = {
     width: PropTypes.string,
     children: PropTypes.any
 };
 
-Search.defaultProps = {
+SearchFilterTray.defaultProps = {
     width: '100%'
 };
 
 export {
-    Search
+    SearchFilterTray
 };

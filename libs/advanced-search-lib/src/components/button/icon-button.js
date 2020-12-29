@@ -20,7 +20,8 @@ const IconButtonElement = styled.button`
     }
 
     svg {
-
+        width: ${rems('18')};
+        height: ${rems('18')};
     }
 `;
 
@@ -29,18 +30,15 @@ const IconButton = (props) => {
         width,
         height,
         children,
-        type
+        type,
+        onClick
     } = props;
-
-    const onClickHandler = () => {
-        console.log('called onClickHandler');
-    };
 
     const buttonProps = {
         width,
         height,
         type,
-        onClick: onClickHandler
+        onClick
     };
 
     return (
@@ -55,7 +53,8 @@ IconButton.propTypes = {
     width: PropTypes.string,
     height: PropTypes.string,
     minWidth: PropTypes.string,
-    children: PropTypes.any
+    children: PropTypes.any,
+    onClick: PropTypes.func
 };
 
 IconButton.defaultProps = {

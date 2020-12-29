@@ -2,14 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Flex } from '../layout';
+import { rems } from '../../utils';
 
 const AppContainer = styled(Flex)`
-  flex-direction: column;
-  align-items: center;
-  color: #333333;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 1rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    color: #333333;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
 `;
+AppContainer.displayName = 'ApplicationContainer';
 
 const ApplicationView = (props) => {
     const {
@@ -23,7 +26,11 @@ const ApplicationView = (props) => {
     };
  
     return (
-        <AppContainer { ...appProps }>
+        <AppContainer
+            marginLeft={rems('250')}
+            marginRight={rems('250')}
+            id='application-container' 
+            { ...appProps }>
             {children}
         </AppContainer>
     );
@@ -35,7 +42,7 @@ ApplicationView.propTypes = {
 };
 
 ApplicationView.defaultProps = {
-    width: '100%'
+    width: 'auto'
 };
 
 export {

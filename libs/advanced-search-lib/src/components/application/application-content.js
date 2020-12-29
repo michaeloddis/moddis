@@ -34,7 +34,7 @@ const ApplicationContent = (props) => {
     };
  
     return (
-        <Box { ...boxProps }>
+        <Box id='application-content' { ...boxProps }>
             {children}
         </Box>
     );

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { rems } from '../../utils';
 
 const SelectHeaderContainer = styled.div`
-    border: solid 1px #dddddd;
+    border: solid 1px #cccccc;
     border-radius: 4px;
     padding: ${rems('6')};
     cursor: pointer;

@@ -5,17 +5,18 @@ import { rems } from '../../utils';
 // import debounce from 'lodash/debounce';
 
 const TextInputElement = styled.input`
-    border: solid 1px #dddddd;
+    border: solid 1px #cccccc;
     border-radius: 4px;
     padding-left: ${rems('8')};
     padding-right: ${rems('8')};
     padding-bottom: ${rems('0')};
     height: ${rems('31')};
-    min-width: ${rems('250')};
+    width: ${props => props.width};
+    min-width: ${props => props.minWidth};
     box-sizing: border-box;
 
     ::placeholder {
-        color: #dddddd;
+        color: #cccccc;
         font-style: italic;
     }
 `;
@@ -73,7 +74,7 @@ TextInput.propTypes = {
 
 TextInput.defaultProps = {
     width: '100%',
-    minWidth: rems('250'),
+    minWidth: rems('80'),
     value: '',
     placeholder: ''
 };

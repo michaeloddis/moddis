@@ -34,7 +34,7 @@ const ApplicationHeader = (props) => {
     };
  
     return (
-        <Box { ...boxProps }>
+        <Box id='application-header' { ...boxProps }>
             {children}
         </Box>
     );
