@@ -32,7 +32,7 @@ import {
     defaultRowFilter,
 
     // Hooks
-    useFilterManager
+    useFilterRowManager
 } from '@moddis/advanced-search-lib';
 
 export const App = () => {
@@ -44,11 +44,11 @@ export const App = () => {
         resetFilters,
         predicateChanged,
         operatorChanged,
-    } = useFilterManager({
+    } = useFilterRowManager({
         initialState: filters
     });
 
-    console.log('In App with filters = ', state);
+    console.log('In App with filters state = ', state);
 
     const addFilterRowHandler = () => {
         addFilterRow({

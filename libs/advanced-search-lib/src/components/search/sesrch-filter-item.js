@@ -1,15 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { rems } from '../../utils';
-
-const SearchFilterItemContainer = styled.div`
-    padding: ${rems('8')};
-    cursor: pointer;
-    width: ${props => props.width};
-    min-width: ${props => props.minWidth};
-    background-color: #FFFFFF;
-`;
+import { SearchFilterItemContainer } from './search-styles';
 
 const SearchFilterItem = (props) => {
     const { width } = props;

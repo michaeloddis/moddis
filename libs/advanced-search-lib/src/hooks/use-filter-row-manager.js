@@ -1,14 +1,12 @@
 import { useState } from "react";
 
-const useFilterManager = ({
+const useFilterRowManager = ({
     initialState
 }) => {
     const [state, stateState] = useState(initialState);
 
     const addFilterRow = (item) => {
         stateState([ ...state, item ]);
-
-        console.log('State after addFilterRow called = ', state);
     };
 
     const removeFilterRow = (item) => {
@@ -17,8 +15,6 @@ const useFilterManager = ({
     };
 
     const resetFilters = () => {
-        console.log('Resetting filter row', initialState);
-
         const filter = [{
             id: 0,
             predicate: {
@@ -36,8 +32,6 @@ const useFilterManager = ({
         }];
 
         stateState(filter);
-
-        console.log('Filter reset to = ', filter);
     };
     
     const predicateChanged = (item) => {
@@ -61,6 +55,6 @@ const useFilterManager = ({
 };
 
 export {
-    useFilterManager
+    useFilterRowManager
 };
 

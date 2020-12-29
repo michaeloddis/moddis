@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { rems } from '../../utils';
-import { Flex } from '../layout';
 import { TextInput } from '../text-input';
 import { IconButton } from '../button';
 import { Select } from '../select';
@@ -13,15 +11,7 @@ import {
     AND_OPERATOR_LABEL
 } from '../../common/constants';
 import { FaTimes } from "react-icons/fa";
-
-const SearchFilterRowContainer = styled(Flex)`
-    border: solid 1px #cccccc;
-    border-radius: 4px;
-    padding: ${rems('16')};
-    margin-bottom: ${rems('16')};
-    width: ${props => props.width};
-    background-color: #FFFFFF;
-`;
+import { SearchFilterRowContainer } from './search-styles';
 
 const SearchFilterRow = (props) => {
     const {
@@ -74,8 +64,6 @@ const SearchFilterRow = (props) => {
     const renderOperatorLabel = (label) => {
         const matches = 'between, greater_than, less_than, in_list';
 
-        console.log('/////////// operatorSelected', operatorSelected);
-
         if (operatorSelected && matches.search(operatorSelected.value) >= 0) {
             return (
                 <Box
@@ -121,9 +109,6 @@ const SearchFilterRow = (props) => {
             </Box>
         );
     };
-    
-    console.log('predicateSelected', predicateSelected);
-    console.log('operatorSelected', operatorSelected);
 
     return (
         <SearchFilterRowContainer width={width}>

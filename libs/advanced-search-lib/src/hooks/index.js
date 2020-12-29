@@ -1,2 +1,2 @@
 export { useInput } from './use-input';
-export { useFilterManager } from './use-filter-manager';
+export { useFilterRowManager } from './use-filter-row-manager';
