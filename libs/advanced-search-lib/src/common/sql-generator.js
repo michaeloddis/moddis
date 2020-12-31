@@ -11,14 +11,12 @@ import {
 // Equals: SELECT * FROM session WHERE domain = '';
 // Greater Then: SELECT * FROM session WHERE screen_width > 100;
 // Less Then: SELECT * FROM session WHERE screen_width < 100;
-// Between: SELECT * FROM session WHERE screen-width BETWEEN 0 AND 0;
-// In: SELECT * FROM session WHERE screen-width IN (value1, value2, ...);
+// Between: SELECT * FROM session WHERE screen_width BETWEEN 0 AND 0;
+// In: SELECT * FROM session WHERE screen_width IN (value1, value2, ...);
 // Contains: SELECT * FROM session WHERE screen_width LIKE '%value%';
 // Starts With: SELECT * FROM session WHERE screen_width LIKE 'value%';
 // Equals and greater then: SELECT * FROM session WHERE domain = '' AND domain < 100;
 const determineSqlStatement = (state) => {
-    // console.log('In determineSqlStatement with state = ', state);
-
     const { filters } = state;
     
     let select = `SELECT * FROM SESSION WHERE`;
@@ -39,25 +37,25 @@ const determineSqlStatement = (state) => {
 
         switch (sqlOperator) {
             case GREATER_THEN:
-                whereClause = `${column} > ${value}`;
+                whereClause = `${column.toUpperCase()} > ${value}`;
                 break;
             case LESS_THEN:
-                whereClause = `${column} < ${value}`;
+                whereClause = `${column.toUpperCase()} < ${value}`;
                 break;
             case EQUALS:
-                whereClause = `${column} = ${value}`;
+                whereClause = `${column.toUpperCase()} = ${value}`;
                 break;
             case BETWEEN:
-                whereClause = `${column} BETWEEN ${value.startValue} AND ${value.endValue}`;
+                whereClause = `${column.toUpperCase()} BETWEEN ${value.startValue} AND ${value.endValue}`;
                 break;
             case IN:
-                whereClause = `${column} IN (${value})`;
+                whereClause = `${column.toUpperCase()} IN (${value})`;
                 break;
             case CONTAINS:
-                whereClause = `${column} LIKE '%${value}%'`;
+                whereClause = `${column.toUpperCase()} LIKE '%${value}%'`;
                 break;
             case STARTS_WITH:
-                whereClause = `${column} LIKE '${value}%'`;
+                whereClause = `${column.toUpperCase()} LIKE '${value}%'`;
                 break;
             default:
                 throw new Error('Missing SQL Operator');
@@ -67,9 +65,10 @@ const determineSqlStatement = (state) => {
 
     });
 
-    // console.log('whereClauses =', whereClauses.toString().replace(',', ' AND '));
+    const regex = /,/gi;
+    const formattedWhereClauses = whereClauses.toString().replace(regex, ' AND ');
 
-    return `${select} ${whereClauses.toString().replace(',', ' AND ')}`;
+    return `${select} ${formattedWhereClauses};`;
 };
 
 export {
