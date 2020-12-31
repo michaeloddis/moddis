@@ -1,3 +1,13 @@
+import {
+    GREATER_THEN,
+    LESS_THEN,
+    EQUALS,
+    BETWEEN,
+    CONTAINS,
+    STARTS_WITH,
+    IN
+} from './constants';
+
 const predicates = [
     {
         label: 'Domain',
@@ -59,22 +69,22 @@ const predicates = [
     {
       label: 'equals',
       value: 'equals',
-      sqlOperator: '='
+      sqlOperator: EQUALS
     },
     {
       label: 'contains',
       value: 'constains',
-      sqlOperator: 'CONTAINS'
+      sqlOperator: CONTAINS
     },
     {
       label: 'starts with',
       value: 'starts_width',
-      sqlOperator: 'STARTS WITH'
+      sqlOperator: STARTS_WITH
     },
     {
       label: 'in list',
       value: 'in_list',
-      sqlOperator: 'IN'
+      sqlOperator: IN
     }
   ];
 
@@ -82,27 +92,27 @@ const predicates = [
     {
       label: 'equals',
       value: 'equals',
-      sqlOperator: '='
+      sqlOperator: EQUALS
     },
     {
       label: 'between',
       value: 'between',
-      sqlOperator: 'BETWEEN'
+      sqlOperator: BETWEEN
     },
     {
       label: 'greater than',
       value: 'greater_than',
-      sqlOperator: '>'
+      sqlOperator: GREATER_THEN
     },
     {
         label: 'less than',
         value: 'less_than',
-        sqlOperator: '<'
+        sqlOperator: LESS_THEN
     },
     {
         label: 'in list',
         value: 'in_list',
-        sqlOperator: 'IN'
+        sqlOperator: IN
     }
   ];
 

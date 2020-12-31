@@ -29,7 +29,6 @@ import {
     stringOperators,
     numberOperators,
     filters,
-    defaultRowFilter,
 
     // Hooks
     useFilterRowManager
@@ -44,33 +43,13 @@ export const App = () => {
         resetFilters,
         predicateChanged,
         operatorChanged,
+        generateSql,
+        sqlStatement
     } = useFilterRowManager({
-        initialState: filters
+        filters
     });
 
-    console.log('In App with filters state = ', state);
-
-    const addFilterRowHandler = () => {
-        addFilterRow({
-            id: filterRowCount + 1,
-            predicate: {
-                label: 'Domain',
-                value: 'domain',
-                type: 'string',
-                placeholder: 'domain.com'
-            },
-            operator: {
-                label: 'equals',
-                value: 'equals',
-                sqlOperator: '='
-            },
-            value: ''
-        });
-    };
-
-    const searchHandler = () => {
-        console.log('Applying search filter!');
-    };
+    console.log('In App with state = ', state);
 
     const deleteHandler = (item) => {
         if (filterRowCount === 1) {
@@ -80,14 +59,11 @@ export const App = () => {
         }
     };
 
-    const resetHandler = () => {
-        resetFilters();
-    };
-
     const renderSearchFilterRows = () => {
-        console.log('In renderSearchFilterRows() with state = ', state);
+        // console.log('In renderSearchFilterRows() with state = ', state);
+        const filters = state.filters || [];
 
-        return state.map((item, index) => {
+        return filters.map((item, index) => {
             console.log('item = ', item);
 
             return (
@@ -119,7 +95,7 @@ export const App = () => {
                 </SearchFilterTray>
                 <PrimaryButton
                     width={rems('60')}
-                    onClick={addFilterRowHandler}>
+                    onClick={addFilterRow}>
                     {ADD_BUTTON_LABEL}
                 </PrimaryButton>
             </ApplicationContent>
@@ -133,17 +109,19 @@ export const App = () => {
                         <PrimaryButton
                             width={rems('140')}
                             marginRight={rems('16')}
-                            onClick={searchHandler}>
+                            onClick={generateSql}>
                             <SearchIcon />
                             {SEARCH_BUTTON_LABEL}
                         </PrimaryButton>
                         <SecondaryButton
-                            onClick={resetHandler}>
+                            onClick={resetFilters}>
                             {RESET_BUTTON_LABEL}
                         </SecondaryButton>
                     </Box>
                     <Box width='100%'>
-                        <ApplicationSql width='100%' />
+                        <ApplicationSql
+                            width='100%'
+                            sql={sqlStatement} />
                     </Box>
                 </Flex>
             </ApplicationFooter>

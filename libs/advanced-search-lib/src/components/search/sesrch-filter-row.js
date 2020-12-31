@@ -110,8 +110,8 @@ const SearchFilterRow = (props) => {
         );
     };
 
-    return (
-        <SearchFilterRowContainer width={width}>
+    const renderRemoveButton = () => {
+        return (
             <Box
                 padding={rems('4')}
                 flexGrow={0}>
@@ -119,6 +119,12 @@ const SearchFilterRow = (props) => {
                     <FaTimes />
                 </IconButton>
             </Box>
+        );
+    };
+
+    return (
+        <SearchFilterRowContainer width={width}>
+            {renderRemoveButton()}
             <Box 
                 padding={rems('4')}
                 flexGrow={0}>

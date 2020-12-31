@@ -3,9 +3,18 @@ const SEARCH_BUTTON_LABEL = 'Search';
 const RESET_BUTTON_LABEL = 'Reset';
 const ADD_BUTTON_LABEL = 'Add';
 
-// Operator constants
+// Operators
 const IS_OPERATOR_LABEL = 'is';
 const AND_OPERATOR_LABEL = 'and';
+
+// SQL
+const EQUALS = 'EQUALS';
+const CONTAINS = 'CONTAINS';
+const STARTS_WITH = 'STARTS_WITH';
+const IN = 'IN';
+const BETWEEN = 'BETWEEN';
+const GREATER_THEN = 'GREATER_THEN';
+const LESS_THEN = 'LESS_THEN';
 
 export {
     APPLICATION_TITLE,
@@ -13,5 +22,12 @@ export {
     RESET_BUTTON_LABEL,
     ADD_BUTTON_LABEL,
     IS_OPERATOR_LABEL,
-    AND_OPERATOR_LABEL
+    AND_OPERATOR_LABEL,
+    EQUALS,
+    CONTAINS,
+    STARTS_WITH,
+    IN,
+    BETWEEN,
+    GREATER_THEN,
+    LESS_THEN
 };

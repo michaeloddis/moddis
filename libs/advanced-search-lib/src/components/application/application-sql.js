@@ -24,7 +24,8 @@ const Output = styled.p`
 `;
 
 const ApplicationSql = (props) => {
-    const { width, generatedSql } = props;
+    const { width, sql } = props;
+    const generatedSql = sql ? sql : 'Your generated SQL statement goes here:'
  
     return (
         <ApplicationSqlContainer
@@ -39,11 +40,11 @@ const ApplicationSql = (props) => {
 
 ApplicationSql.propTypes = {
     width: PropTypes.string,
-    generatedSql: PropTypes.string
+    sql: PropTypes.string
 };
 
 ApplicationSql.defaultProps = {
-    generatedSql: 'Your generated SQL statement goes here:'
+    sql: ''
 };
 
 export {
