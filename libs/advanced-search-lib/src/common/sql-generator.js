@@ -18,11 +18,13 @@ import {
 // Equals and greater then: SELECT * FROM session WHERE domain = '' AND domain < 100;
 const determineSqlStatement = (state) => {
     const { filters } = state;
+    const regex = /,/gi;
+    const regex2 = /\|/gi;
     
     let select = `SELECT * FROM SESSION WHERE`;
 
     // Loop though all the filters in order to map the SQL Where clauses used by the sql statement.
-    const whereClauses = filters.map((item) => {
+    let whereClauses = filters.map((item, index) => {
         const {
             predicate: {
                 value: column
@@ -35,6 +37,7 @@ const determineSqlStatement = (state) => {
 
         let whereClause = ``;
 
+
         switch (sqlOperator) {
             case GREATER_THEN:
                 whereClause = `${column.toUpperCase()} > ${value}`;
@@ -43,13 +46,13 @@ const determineSqlStatement = (state) => {
                 whereClause = `${column.toUpperCase()} < ${value}`;
                 break;
             case EQUALS:
-                whereClause = `${column.toUpperCase()} = ${value}`;
+                whereClause = `${column.toUpperCase()} = '${value.replace(regex, '|')}'`;
                 break;
             case BETWEEN:
                 whereClause = `${column.toUpperCase()} BETWEEN ${value.startValue} AND ${value.endValue}`;
                 break;
             case IN:
-                whereClause = `${column.toUpperCase()} IN (${value})`;
+                whereClause = `${column.toUpperCase()} IN (${value.replace(regex, '|')})`;
                 break;
             case CONTAINS:
                 whereClause = `${column.toUpperCase()} LIKE '%${value}%'`;
@@ -65,8 +68,8 @@ const determineSqlStatement = (state) => {
 
     });
 
-    const regex = /,/gi;
-    const formattedWhereClauses = whereClauses.toString().replace(regex, ' AND ');
+    let formattedWhereClauses = whereClauses.toString().replace(regex, ' AND ');
+    formattedWhereClauses = formattedWhereClauses.toString().replace(regex2, ',');
 
     return `${select} ${formattedWhereClauses};`;
 };
