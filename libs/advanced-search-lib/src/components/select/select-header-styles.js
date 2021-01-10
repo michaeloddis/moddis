@@ -12,11 +12,27 @@ const SelectHeaderContainer = styled.div`
     background-color: #FFFFFF;
 `;
 const SelectLabel = styled.span`
-    width: 90%;
+    width: 92%;
     display: inline-block;
+    float: left;
+`;
+
+const IconWrapper = styled.span`
+    padding-right: ${props => props.paddingRight};
+    display: inline-block;
+    cursor: pointer;
+    border: solid 0px #ffffff;
+    height: 16px;
+
+    svg {
+        width: 12px;
+        height: 12px;
+        fill: #999999;
+    }
 `;
 
 export {
     SelectHeaderContainer,
-    SelectLabel
+    SelectLabel,
+    IconWrapper
 };

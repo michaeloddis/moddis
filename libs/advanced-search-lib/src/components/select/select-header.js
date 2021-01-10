@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { rems } from '../../utils';
 import {
     SelectHeaderContainer,
-    SelectLabel
+    SelectLabel,
+    IconWrapper
 } from './select-header-styles';
 
 const SelectHeader = (props) => {
@@ -22,16 +23,15 @@ const SelectHeader = (props) => {
     };
 
     const Icon = () => {
-        return React.cloneElement(icon, {
-            height: rems('12'),
-            width: rems('12')
-        });
+        return React.cloneElement(icon);
     }
  
     return (
         <SelectHeaderContainer { ...selectHeaderProps }>
             <SelectLabel>{label}</SelectLabel>
-            <Icon />
+            <IconWrapper>
+                <Icon />
+            </IconWrapper>
         </SelectHeaderContainer>
     );
 };

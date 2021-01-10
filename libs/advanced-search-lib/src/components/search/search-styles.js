@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { rems } from '../../utils';
 import { Flex } from '../layout';
 
-const SearchFilterItemContainer = styled.div`
-    padding: ${rems('8')};
-    cursor: pointer;
-    width: ${props => props.width};
-    min-width: ${props => props.minWidth};
-    background-color: #FFFFFF;
-`;
-
 const SearchFilterRowContainer = styled(Flex)`
     border: solid 1px #cccccc;
     border-radius: 4px;
@@ -30,7 +22,7 @@ const SearchOperatorLabelContaner = styled.div`
 `;
 
 export {
-    SearchFilterItemContainer,
+
     SearchFilterRowContainer,
     SearchOperatorLabelContaner
 };

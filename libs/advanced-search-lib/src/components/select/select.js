@@ -39,7 +39,7 @@ const Select = (props) => {
         setIsListOpen(false);
     };
 
-    const tiggleMenuHandler = () => {
+    const toggleMenuHandler = () => {
         setIsListOpen(!isListOpen);
 
         if (onToggleMenu) {
@@ -86,7 +86,7 @@ const Select = (props) => {
             <SelectHeader
                 label={selectedOption.label}
                 icon={ isListOpen ? <FaChevronUp /> : <FaChevronDown />}
-                onClick={tiggleMenuHandler}
+                onClick={toggleMenuHandler}
                 width={width}
                 minWidth={minWidth} />
             <SelectList { ...selectListProps }>
