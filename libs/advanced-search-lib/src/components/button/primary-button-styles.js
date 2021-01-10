@@ -13,6 +13,28 @@ const ButtonElement = styled.button`
     margin-right: ${props => props.marginRight};
     width: ${props => props.width};
 
+    :disabled {
+        background-color: #cccccc;
+        border: solid 1px #cccccc;
+
+        :hover {
+            background-color: #cccccc;
+            cursor: default;
+        }
+
+        span {
+            cursor: default;
+        }
+
+        div {
+            cursor: inherit;
+        }
+
+        svg {
+            cursor: inherit;
+        }
+    }
+
     :hover {
         background-color: #3485be;
     }

@@ -102,7 +102,7 @@ const SearchFilterRow = (props) => {
                         <TextInput
                             placeholder='0' 
                             name='filterStartValue' 
-                            value={rowItem.startValue}
+                            value={rowItem.value.startValue}
                             onChange={onStartValueChangeHandler} />
                     </Box>
                     <Box 
@@ -114,7 +114,7 @@ const SearchFilterRow = (props) => {
                         <TextInput
                             placeholder='0' 
                             name='filterEndValue' 
-                            value={rowItem.endValue}
+                            value={rowItem.value.endValue}
                             onChange={onEndValueChangeHandler} />
                     </Box>
                 </>

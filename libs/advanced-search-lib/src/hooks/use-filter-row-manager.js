@@ -6,7 +6,8 @@ import { EQUALS } from '../common/constants';
 const initialState = {
     filters: [],
     filterRowCount: 1,
-    sqlStatement: ''
+    sqlStatement: '',
+    isValid: true
 };
 
 /**
@@ -84,8 +85,8 @@ const reducer = (state, action) => {
 
             if (selectedRowItem.operator.value === 'between') {
                 selectedRowItem.value = {
-                    startValue: 0,
-                    endValue: 0
+                    startValue: '',
+                    endValue: ''
                 }
             }
 
@@ -101,9 +102,11 @@ const reducer = (state, action) => {
                 switch (action.payload.field) {
                     case 'startValue':
                         selectedRowItem.value.startValue = action.payload.value;
+                        console.log('startValue =', selectedRowItem.value.startValue);
                         break;
                     case 'endValue':
                         selectedRowItem.value.endValue = action.payload.value;
+                        console.log('endValue =', selectedRowItem.value.endValue);
                         break;
                     default:
                         selectedRowItem.value = action.payload.value;
@@ -171,6 +174,10 @@ const useFilterRowManager = ({
     };
 
     const valueChanged = (value, rowItem, field = 'value') => { 
+        console.log('valueChanged value =', value);
+        console.log('valueChanged rowItem =', rowItem);
+        console.log('valueChanged field =', field);
+
         dispatch({
             type: 'valueChanged',
             payload: {
@@ -179,6 +186,22 @@ const useFilterRowManager = ({
                 field
             }
         });
+    };
+
+    const filterRowsValid = () => {
+        for (let i = 0; i < state.filters.length; ++i) {
+            if (typeof state.filters[i].value === 'string') {
+                // console.log('String =', state.filters[i].value);
+                // const test = state.filters[i].value !== '';
+                // console.log(test);
+            } else if (typeof state.filters[i].value === 'object') {
+                // console.log('object =', state.filters[i].value);
+                // const test2 = state.filters[i].value.startValue !== 0 && state.filters[i].value.endValue !== 0;
+                //console.log(test2);
+            }
+        }
+
+        return state.isValid;
     };
 
     return {
@@ -192,6 +215,7 @@ const useFilterRowManager = ({
         predicateChanged,
         operatorChanged,
         valueChanged,
+        filterRowsValid,
         sqlStatement: state.sqlStatement
     };
 };

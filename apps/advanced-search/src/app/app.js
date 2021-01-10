@@ -45,7 +45,8 @@ export const App = () => {
         operatorChanged,
         valueChanged,
         generateSql,
-        sqlStatement
+        sqlStatement,
+        filterRowsValid
     } = useFilterRowManager({
         filters
     });
@@ -111,6 +112,7 @@ export const App = () => {
                             width='100%'>
                             <Box>
                                 <PrimaryButton
+                                    disabled={!filterRowsValid()}
                                     width={rems('140')}
                                     marginRight={rems('16')}
                                     onClick={generateSql}>

@@ -23,12 +23,18 @@ const PrimaryButton = (props) => {
         height,
         type,
         marginRight,
-        disabled,
         onClick
     };
 
+    console.log(buttonProps);
+
+    if (disabled) {
+        buttonProps.disabled = disabled;
+    }
+
     return (
-        <ButtonElement { ...buttonProps }>
+        <ButtonElement 
+            { ...buttonProps } >
             <span>{children}</span>
         </ButtonElement>
     );
