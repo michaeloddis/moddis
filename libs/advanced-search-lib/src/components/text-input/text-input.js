@@ -1,25 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { rems } from '../../utils';
-// import debounce from 'lodash/debounce';
-
-const TextInputElement = styled.input`
-    border: solid 1px #cccccc;
-    border-radius: 4px;
-    padding-left: ${rems('8')};
-    padding-right: ${rems('8')};
-    padding-bottom: ${rems('0')};
-    height: ${rems('31')};
-    width: ${props => props.width};
-    min-width: ${props => props.minWidth};
-    box-sizing: border-box;
-
-    ::placeholder {
-        color: #cccccc;
-        font-style: italic;
-    }
-`;
+import { TextInputElement } from './text-input-styles';
 
 const TextInput = (props) => {
     const {
@@ -29,21 +11,24 @@ const TextInput = (props) => {
         placeholder,
         name,
         value,
+        onChange
     } = props;
     
-    const [currentValue, setCurrentValue] = useState(value);
+    const [selectedValue, setSelectedValue] = useState('');
 
     const onChangeHandler = (event) => {
-        setCurrentValue(event.currentTarget.value);
-        console.log('event.currentTarget.value = ', event.currentTarget.value);
-        console.log('currentValue = ', currentValue);
+        setSelectedValue(event.currentTarget.value);
+        
+        if (onChange) {
+            onChange(event.currentTarget.value)
+        }
     };
 
     useEffect(() => {
-        if (typeof value !== 'undefined') {
-            setCurrentValue(value);
+        if (typeof value !== 'undefined' && value !== selectedValue) {
+            setSelectedValue(value);
         }
-    }, [value]);
+    }, [value, selectedValue]);
 
     const textInputProps = {
         id: name,
@@ -51,12 +36,14 @@ const TextInput = (props) => {
         width,
         minWidth,
         placeholder,
-        value: currentValue,
-        onChange: onChangeHandler
+        value: selectedValue
     };
 
     return (
-        <TextInputElement type='text' { ...textInputProps }>
+        <TextInputElement
+            type='text'
+            onChange={onChangeHandler}
+            { ...textInputProps }>
             {children}
         </TextInputElement>
     );
@@ -69,7 +56,8 @@ TextInput.propTypes = {
     width: PropTypes.string,
     minWidth: PropTypes.string,
     children: PropTypes.any,
-    onReset: PropTypes.func
+    onReset: PropTypes.func,
+    onChange: PropTypes.func
 };
 
 TextInput.defaultProps = {
