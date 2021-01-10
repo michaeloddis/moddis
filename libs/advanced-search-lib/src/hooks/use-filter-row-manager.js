@@ -1,65 +1,115 @@
 import { useReducer } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { determineSqlStatement } from '../common/sql-generator';
+import { EQUALS } from '../common/constants';
  
 const initialState = {
-    filters: [{
-        id: 0,
-        predicate: {
-            label: 'Domain',
-            value: 'domain',
-            type: 'string',
-            placeholder: 'domain.com'
-        },
-        operator: {
-            label: 'equals',
-            value: 'equals',
-            sqlOperator: 'EQUALS'
-        },
-        value: 'foo.com'
-    }],
+    filters: [],
     filterRowCount: 1,
     sqlStatement: ''
 };
 
+/**
+ * Removes an item from an array when given an index.
+ * @param {Array} filters 
+ * @param {Number} index
+ * @return {Array} A new array of filters without the item found at the index.
+ */
+const removeFilterRowByIndex = (filters, index) => {
+    return filters.filter((item) => {
+        return item !== filters[index];
+    });
+};
+
+const filterRowDefinition = {
+    id: uuidv4(),
+    predicate: {
+        label: 'Domain',
+        value: 'domain',
+        type: 'string',
+        placeholder: 'domain.com'
+    },
+    operator: {
+        label: 'equals',
+        value: 'equals',
+        sqlOperator: EQUALS
+    },
+    value: ''
+};
+
 const reducer = (state, action) => {
     let selectedIndex = null;
-    let seedFilterRowItem = null;
+    let selectedRowItem = null;
+    let newFilterRowItem = null;
     let filters = null;
 
     switch (action.type) {
         case 'add':
-            seedFilterRowItem = { ...initialState.filters[0] };
-            seedFilterRowItem.id = uuidv4();
+            newFilterRowItem = Object.assign({}, filterRowDefinition);
+            newFilterRowItem.id = uuidv4();
 
             return {
                 ...state,
-                filters: [ ...state.filters, seedFilterRowItem ],
+                filters: [ ...state.filters, newFilterRowItem ],
                 filterRowCount: state.filterRowCount + 1
             };
         case 'delete':
             selectedIndex = state.filters.indexOf(action.payload);
-            console.log('selectedIndex = ', selectedIndex);
-            console.log('filters = ', [ ...state.filters.slice(0, selectedIndex), ...state.filters.slice(selectedIndex + 1, state.length) ]);
 
             return {
                 ...state,
-                filters: [ ...state.filters.slice(0, selectedIndex), ...state.filters.slice(selectedIndex + 1, state.length) ],
+                filters: removeFilterRowByIndex(state.filters, selectedIndex),
                 filterRowCount: state.filterRowCount - 1
             };
         case 'reset':
-            filters = [ ...initialState.filters ];
-            filters[0].id = uuidv4();
+            filters = [Object.assign({}, filterRowDefinition)];
 
             return {
                 ...initialState,
                 filters
             };
-        case 'predicateChanged':
+        case 'predicateChanged': 
+            selectedIndex = state.filters.indexOf(action.payload.rowItem);
+            selectedRowItem = state.filters[selectedIndex];
+            selectedRowItem.predicate = { ...action.payload.predicate };
+
             return {
                 ...state
             };
         case 'operatorChanged':
+            selectedIndex = state.filters.indexOf(action.payload.rowItem);
+            selectedRowItem = state.filters[selectedIndex];
+            selectedRowItem.operator = { ...action.payload.operator };
+            selectedRowItem.value = '';
+
+            if (selectedRowItem.operator.value === 'between') {
+                selectedRowItem.value = {
+                    startValue: 0,
+                    endValue: 0
+                }
+            }
+
+            return {
+                ...state
+            };
+        case 'valueChanged':
+            selectedIndex = state.filters.indexOf(action.payload.rowItem);
+
+            if (selectedIndex !== -1) {
+                selectedRowItem = state.filters[selectedIndex];
+
+                switch (action.payload.field) {
+                    case 'startValue':
+                        selectedRowItem.value.startValue = action.payload.value;
+                        break;
+                    case 'endValue':
+                        selectedRowItem.value.endValue = action.payload.value;
+                        break;
+                    default:
+                        selectedRowItem.value = action.payload.value;
+                }
+            }
+
             return {
                 ...state
             };
@@ -78,7 +128,8 @@ const useFilterRowManager = ({
 }) => {
     const [state, dispatch] = useReducer(reducer, {
         ...initialState,
-        filters
+        filters,
+        filterRowCount: filters.length
     });
 
     const filterRowCount = state.filterRowCount;
@@ -99,12 +150,35 @@ const useFilterRowManager = ({
         dispatch({type: 'generateSql'});
     };
     
-    const predicateChanged = (predicate) => {
-        dispatch({type: 'predicateChanged', payload: predicate });
+    const predicateChanged = (predicate, rowItem) => {
+        dispatch({
+            type: 'predicateChanged',
+            payload: {
+                predicate,
+                rowItem
+            }
+        });
     };
 
-    const operatorChanged = (operator) => {
-        dispatch({type: 'operatorChanged', payload: operator });
+    const operatorChanged = (operator, rowItem) => { 
+        dispatch({
+            type: 'operatorChanged',
+            payload: {
+                operator,
+                rowItem
+            }
+        });
+    };
+
+    const valueChanged = (value, rowItem, field = 'value') => { 
+        dispatch({
+            type: 'valueChanged',
+            payload: {
+                value,
+                rowItem,
+                field
+            }
+        });
     };
 
     return {
@@ -117,6 +191,7 @@ const useFilterRowManager = ({
         generateSql,
         predicateChanged,
         operatorChanged,
+        valueChanged,
         sqlStatement: state.sqlStatement
     };
 };

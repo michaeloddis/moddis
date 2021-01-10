@@ -1,12 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 import {
-    EQUALS,
-    GREATER_THEN
-    // LESS_THEN,
-    // IN,
-    // BETWEEN,
+    EQUALS
     // CONTAINS,
-    // STARTS_WITH
+    // IN
 } from './constants';
 
 const filters = [
@@ -23,23 +19,55 @@ const filters = [
             value: 'equals',
             sqlOperator: EQUALS
         },
-        value: 'foo.com'
+        value: ''
+    }
+    /*
+    {
+        id: uuidv4(),
+        predicate: {
+            label: 'Domain',
+            value: 'domain',
+            type: 'string',
+            placeholder: 'domain.com'
+        },
+        operator: {
+            label: 'equals',
+            value: 'equals',
+            sqlOperator: EQUALS
+        },
+        value: 'foo.com, yes'
     },
     {
         id: uuidv4(),
         predicate: {
-            label: 'Screen Height',
-            value: 'screen_height',
+            label: 'User Name',
+            value: 'user_name',
+            type: 'string',
+            placeholder: 'domain.com'
+        },
+        operator: {
+            label: 'in list',
+            value: 'in_list',
+            sqlOperator: IN
+        },
+        value: 'foo, bar'
+    },
+    {
+        id: uuidv4(),
+        predicate: {
+            label: 'Screen Width',
+            value: 'screen_width',
             type: 'number',
             placeholder: '0'
         },
         operator: {
-            label: 'greater than',
-            value: 'greater_than',
-            sqlOperator: GREATER_THEN
+            label: 'contains',
+            value: 'constains',
+            sqlOperator: CONTAINS
         },
-        value: 100
-    }
+        value: 'Hello'
+    },
+    */
 ];
 
 export {
