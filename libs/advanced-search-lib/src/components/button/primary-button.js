@@ -11,7 +11,7 @@ const ButtonElement = styled.button`
     color: #FFFFFF;
     cursor: pointer;
     font-size: ${rems('16')};
-    height: ${rems('45')};
+    height: ${props => props.height};
     margin-right: ${props => props.marginRight};
     width: ${props => props.width};
 
@@ -23,6 +23,7 @@ const ButtonElement = styled.button`
 const PrimaryButton = (props) => {
     const {
         width,
+        height,
         children,
         name,
         value,
@@ -36,6 +37,7 @@ const PrimaryButton = (props) => {
         name,
         value,
         width,
+        height,
         type,
         marginRight,
         disabled,
@@ -52,6 +54,7 @@ const PrimaryButton = (props) => {
 PrimaryButton.propTypes = {
     type: PropTypes.string,
     width: PropTypes.string,
+    height: PropTypes.string,
     children: PropTypes.any,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
@@ -60,6 +63,7 @@ PrimaryButton.propTypes = {
 
 PrimaryButton.defaultProps = {
     type: 'button',
+    height: rems('45'),
     disabled: false
 };
 
