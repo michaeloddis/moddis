@@ -33,18 +33,24 @@ const SearchFilterRow = (props) => {
     const [predicateSelected, setPredicateSelected] = useState();
 
     useEffect(() => {
-        setOperatorSelected(selectedOperator);
         setPredicateSelected(selectedPredicate);
+        setOperatorSelected(selectedOperator);
     }, [selectedOperator, selectedPredicate]);
 
     const onPredicateChangeHandler = (item) => {
         const operatorOptions = item.type === 'string' ? stringOperators : numberOperators;
-        
+        const selectedOperator = operatorOptions[0];
+
         setOperators(operatorOptions);
         setPredicateSelected(item);
+        setOperatorSelected(selectedOperator);
 
         if (onPredicateChange) {
             onPredicateChange(item, rowItem);
+        }
+
+        if (onOperatorChange) {
+            onOperatorChange(selectedOperator, rowItem);
         }
     };
 

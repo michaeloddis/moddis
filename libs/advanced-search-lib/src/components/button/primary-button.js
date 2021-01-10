@@ -26,8 +26,6 @@ const PrimaryButton = (props) => {
         onClick
     };
 
-    console.log(buttonProps);
-
     if (disabled) {
         buttonProps.disabled = disabled;
     }

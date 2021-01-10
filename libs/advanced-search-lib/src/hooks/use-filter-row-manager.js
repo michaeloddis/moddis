@@ -102,11 +102,9 @@ const reducer = (state, action) => {
                 switch (action.payload.field) {
                     case 'startValue':
                         selectedRowItem.value.startValue = action.payload.value;
-                        console.log('startValue =', selectedRowItem.value.startValue);
                         break;
                     case 'endValue':
                         selectedRowItem.value.endValue = action.payload.value;
-                        console.log('endValue =', selectedRowItem.value.endValue);
                         break;
                     default:
                         selectedRowItem.value = action.payload.value;
@@ -174,10 +172,6 @@ const useFilterRowManager = ({
     };
 
     const valueChanged = (value, rowItem, field = 'value') => { 
-        console.log('valueChanged value =', value);
-        console.log('valueChanged rowItem =', rowItem);
-        console.log('valueChanged field =', field);
-
         dispatch({
             type: 'valueChanged',
             payload: {

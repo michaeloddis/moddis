@@ -63,8 +63,6 @@ export const App = () => {
         const filters = state.filters || [];
 
         return filters.map((item, index) => {
-            // console.log('item = ', item);
-
             return (
                 <SearchFilterRow 
                     key={index}
