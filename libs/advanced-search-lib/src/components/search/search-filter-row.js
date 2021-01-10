@@ -24,6 +24,7 @@ const SearchFilterRow = (props) => {
         selectedOperator,
         onPredicateChange,
         onOperatorChange,
+        onValueChange,
         onDelete
     } = props;
 
@@ -43,7 +44,7 @@ const SearchFilterRow = (props) => {
         setPredicateSelected(item);
 
         if (onPredicateChange) {
-            onPredicateChange(item);
+            onPredicateChange(item, rowItem);
         }
     };
 
@@ -51,7 +52,25 @@ const SearchFilterRow = (props) => {
         setOperatorSelected(item);
 
         if (onOperatorChange) {
-            onOperatorChange(item);
+            onOperatorChange(item, rowItem);
+        }
+    };
+
+    const onValueChangeHandler = (value) => {
+        if (onValueChange) {
+            onValueChange(value, rowItem);
+        }
+    };
+
+    const onStartValueChangeHandler = (value) => {
+        if (onValueChange) {
+            onValueChange(value, rowItem, 'startValue');
+        }
+    };
+
+    const onEndValueChangeHandler = (value) => {
+        if (onValueChange) {
+            onValueChange(value, rowItem, 'endValue');
         }
     };
 
@@ -83,7 +102,8 @@ const SearchFilterRow = (props) => {
                         <TextInput
                             placeholder='0' 
                             name='filterStartValue' 
-                            value='' />
+                            value={rowItem.startValue}
+                            onChange={onStartValueChangeHandler} />
                     </Box>
                     <Box 
                         padding={rems('4')}
@@ -94,7 +114,8 @@ const SearchFilterRow = (props) => {
                         <TextInput
                             placeholder='0' 
                             name='filterEndValue' 
-                            value='' />
+                            value={rowItem.endValue}
+                            onChange={onEndValueChangeHandler} />
                     </Box>
                 </>
             );
@@ -104,8 +125,9 @@ const SearchFilterRow = (props) => {
             <Box padding={rems('4')}>
                 <TextInput
                     placeholder={predicateSelected && predicateSelected.placeholder} 
-                    name='filterValue' 
-                    value='' />
+                    name='filterValue'
+                    value={rowItem.value}
+                    onChange={onValueChangeHandler} />
             </Box>
         );
     };
@@ -123,7 +145,7 @@ const SearchFilterRow = (props) => {
     };
 
     return (
-        <SearchFilterRowContainer width={width}>
+        <SearchFilterRowContainer flexWrap='nowrap' width={width}>
             {renderRemoveButton()}
             <Box 
                 padding={rems('4')}
@@ -162,6 +184,7 @@ SearchFilterRow.propTypes = {
     // Event handlers
     onPredicateChange: PropTypes.func,
     onOperatorChange: PropTypes.func,
+    onValueChange: PropTypes.func,
     onDelete: PropTypes.func
 };
 
