@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     // Components
-    ApplicationView,
+    ApplicationContainer,
     ApplicationTitle,
     ApplicationHeader,
     ApplicationContent,
@@ -43,13 +43,12 @@ export const App = () => {
         resetFilters,
         predicateChanged,
         operatorChanged,
+        valueChanged,
         generateSql,
         sqlStatement
     } = useFilterRowManager({
         filters
     });
-
-    console.log('In App with state = ', state);
 
     const deleteHandler = (item) => {
         if (filterRowCount === 1) {
@@ -60,30 +59,30 @@ export const App = () => {
     };
 
     const renderSearchFilterRows = () => {
-        // console.log('In renderSearchFilterRows() with state = ', state);
         const filters = state.filters || [];
 
         return filters.map((item, index) => {
-            console.log('item = ', item);
+            // console.log('item = ', item);
 
             return (
                 <SearchFilterRow 
                     key={index}
                     rowItem={item}
-                    selectedPredicate={item.predicate || defaultRowFilter.predicate}
-                    selectedOperator={item.operator || defaultRowFilter.operator}
+                    selectedPredicate={item.predicate}
+                    selectedOperator={item.operator}
                     predicates={predicates}
                     stringOperators={stringOperators}
                     numberOperators={numberOperators}
                     onDelete={deleteHandler}
                     onPredicateChange={predicateChanged}
-                    onOperatorChange={operatorChanged} />
+                    onOperatorChange={operatorChanged}
+                    onValueChange={valueChanged} />
             )
         });
     };
 
     return (
-        <ApplicationView>
+        <ApplicationContainer>
             <ApplicationHeader>
                 <ApplicationTitle>
                     {APPLICATION_TITLE}
@@ -95,6 +94,7 @@ export const App = () => {
                 </SearchFilterTray>
                 <PrimaryButton
                     width={rems('60')}
+                    height={rems('35')}
                     onClick={addFilterRow}>
                     {ADD_BUTTON_LABEL}
                 </PrimaryButton>
@@ -125,7 +125,7 @@ export const App = () => {
                     </Box>
                 </Flex>
             </ApplicationFooter>
-        </ApplicationView>
+        </ApplicationContainer>
     );
 };
 export default App;
