@@ -103,20 +103,28 @@ export const App = () => {
                 marginTop={rems('64')}
                 paddingTop={rems('16')}>
                 <Flex 
-                    flexDirection='column' 
+                    flexDirection='column'
                     width='100%'>
                     <Box>
-                        <PrimaryButton
-                            width={rems('140')}
-                            marginRight={rems('16')}
-                            onClick={generateSql}>
-                            <SearchIcon />
-                            {SEARCH_BUTTON_LABEL}
-                        </PrimaryButton>
-                        <SecondaryButton
-                            onClick={resetFilters}>
-                            {RESET_BUTTON_LABEL}
-                        </SecondaryButton>
+                        <Flex 
+                            flexWrap='nowrap'
+                            width='100%'>
+                            <Box>
+                                <PrimaryButton
+                                    width={rems('140')}
+                                    marginRight={rems('16')}
+                                    onClick={generateSql}>
+                                    <SearchIcon />
+                                    {SEARCH_BUTTON_LABEL}
+                                </PrimaryButton>
+                            </Box>
+                            <Box>
+                                <SecondaryButton
+                                    onClick={resetFilters}>
+                                    {RESET_BUTTON_LABEL}
+                                </SecondaryButton>
+                            </Box>
+                        </Flex>
                     </Box>
                     <Box width='100%'>
                         <ApplicationSql

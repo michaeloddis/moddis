@@ -26,8 +26,8 @@ const ApplicationContainer = (props) => {
  
     return (
         <Container
-            marginLeft={rems('250')}
-            marginRight={rems('250')}
+            marginLeft={rems('350')}
+            marginRight={rems('350')}
             id='application-container' 
             { ...appProps }>
             {children}

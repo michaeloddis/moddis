@@ -5,13 +5,14 @@ import { rems } from '../../utils';
 import { FaSearch } from "react-icons/fa";
 
 const IconWrapper = styled.div`
-    padding-right: ${props => props.paddingRight};
     display: inline-block;
     cursor: pointer;
     border: solid 0px #ffffff;
-    margin-top: -2px;
-    width: 16px;
-    height: 16px;
+    margin: 0px;
+    padding: 0px;
+    padding-right: ${props => props.paddingRight};
+    width: ${rems('16')};
+    height: ${rems('16')};
 `;
 
 const SearchIcon = (props) => {
