@@ -18,15 +18,17 @@ Creates a UI which gives a User the ability to building a set of dynamic filters
 ## Project Structure
 
 ```
-+-- apps/
-| +-- advanced-search - Contains the main application
-+-- libs/
-| +-- advanced-search-lib/ - Contains the library files used by the Advanced Search application.
-| +--- src/
-| +----- common/ - Commonly shared files
-| +----- components/ - Shared components
-| +----- hooks/ - Shared React Hooks
-| +----- utils/ - Shared Utils
++-- moddis/
++----- apps/
+| +----- advanced-search/
+| +------- src/ - Contains the main application files
++----- libs/
+| +------ advanced-search-lib/ - Contains the library files used by the Advanced Search application.
+| +-------- src/
+| +---------- common/ - Commonly shared files
+| +---------- components/ - Shared components
+| +---------- hooks/ - Shared React Hooks
+| +---------- utils/ - Shared Utils
 ```
 
 ## Prerequisite
