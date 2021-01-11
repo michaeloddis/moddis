@@ -1,76 +1,54 @@
-# Moddis
+# Session Search
 
-This project was generated using [Nx](https://nx.dev).
+## About Project
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+Creates a UI which gives a User the ability to building a set of dynamic filters that can be used to search a subset of session data.
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+- React
+- Styled Componets
+- Nx
 
-## Adding capabilities to your workspace
+#### Features
+- The ability to create a filter based on an Predicate, Operator and Value or Value Object. 
+- The ability add a new filter to the list of filters.
+- The ability to delete a filter fom the list of filters.
+- The ability to reset the list of filters to a default starting filter.
+- The ability to see a SQL statement which could be used query data from a table called `session`.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+## Project Structure
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```
++-- apps/
+| +-- advanced-search - Contains the main application
++-- libs/
+| +-- advanced-search-lib/ - Contains the library files used by the Advanced Search application.
+| +--- src/
+| +----- common/ - Commonly shared files
+| +----- components/ - Shared components
+| +----- hooks/ - Shared React Hooks
+| +----- utils/ - Shared Utils
+```
 
-Below are some plugins which you can add to your workspace:
+## Prerequisite
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+#### Install the Nx CLI
 
-## Generate an application
+In order to run the Nx commands, install the Nx CLI globally.
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Run `yarn global add nx`. For NPM, run `npm install -g nx`.
 
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@moddis/mylib`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
+#### Adobe Nx
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Running the project
+
+#### Development server
+
+Run `nx serve advanced-search` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+
+#### Things to add later when time permits
+
+- Validation applied to each value filters rows value field. At this moment, validation is very simple, check that each value field is each filter row is not an empty string.
+- Add unit and e2e test
+- Animations to add some spice to interactions.
