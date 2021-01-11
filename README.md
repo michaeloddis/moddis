@@ -1,4 +1,4 @@
-# Moddis
+# Moddis Portfolio
 
 ## About Repository
 
@@ -6,4 +6,5 @@ This is a portfolio of projects created by myself for various purposes. The list
 
 # Projects
 
-[Session Search](/session-search-project.md)
+### React prototypes
+[Session Search](/docs/session-search-project.md)
