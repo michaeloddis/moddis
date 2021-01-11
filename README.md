@@ -4,6 +4,6 @@
 
 This is an Nx Worspace of applications and libraries created by myself for various purposes. The list will grow over time.
 
-# Applications
+## Applications
 
 [Session Search](/docs/session-search-project.md)

@@ -47,7 +47,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 #### Development server
 
-Run `nx serve advanced-search` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+- Run `nx serve advanced-search` from the site root `moddis` to launch the application running the dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Things to add later when time permits
 
