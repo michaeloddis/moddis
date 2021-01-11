@@ -13,3 +13,5 @@ Run `yarn global add nx`. For NPM, run `npm install -g nx`.
 ## Applications
 
 [Session Search README](/docs/session-search-project.md)
+
+- Run `nx serve advanced-search` to launch the application running on the dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
