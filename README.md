@@ -4,11 +4,12 @@
 
 This is an Nx Worspace of applications and libraries created by myself for various purposes. The list will grow over time.
 
-#### Install the Nx CLI
+#### Install Dependencies and Nx CLI
 
 In order to run the Nx commands in this workspace, install the Nx CLI globally.
 
-Run `yarn global add nx`. For NPM, run `npm install -g nx`.
+- Run `yarn global add nx`. For NPM, run `npm install -g nx`.
+- Run `yarn run init` to install the dependencies.
 
 ## Applications
 
