@@ -1,10 +1,9 @@
-# Moddis Portfolio
+# Moddis Workspace
 
-## About Repository
+## About Workspace
 
-This is a portfolio of projects created by myself for various purposes. The list of projects will grow over time.
+This is an Nx Worspace of applications and libraries created by myself for various purposes. The list will grow over time.
 
-# Projects
+# Applications
 
-### React prototypes
 [Session Search](/docs/session-search-project.md)
