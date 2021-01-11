@@ -52,5 +52,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 ## Things to add later when time permits
 
 - Validation applied to each value filters rows value field. At this moment, validation is very simple, check that each value field is each filter row is not an empty string.
+- Better tabbing
+- Accessibility and 508 compliance
 - Add unit and e2e test
 - Animations to add some spice to interactions.
