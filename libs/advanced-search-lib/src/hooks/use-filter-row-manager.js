@@ -7,7 +7,7 @@ const initialState = {
     filters: [],
     filterRowCount: 1,
     sqlStatement: '',
-    isValid: true
+    isValid: false
 };
 
 /**
@@ -183,19 +183,17 @@ const useFilterRowManager = ({
     };
 
     const filterRowsValid = () => {
+        let allFiltersValid = false;
+        
         for (let i = 0; i < state.filters.length; ++i) {
             if (typeof state.filters[i].value === 'string') {
-                // console.log('String =', state.filters[i].value);
-                // const test = state.filters[i].value !== '';
-                // console.log(test);
+                allFiltersValid = state.filters[i].value !== '';
             } else if (typeof state.filters[i].value === 'object') {
-                // console.log('object =', state.filters[i].value);
-                // const test2 = state.filters[i].value.startValue !== 0 && state.filters[i].value.endValue !== 0;
-                //console.log(test2);
+                allFiltersValid = allFiltersValid && state.filters[i].value.startValue !== '' && state.filters[i].value.endValue !== '';
             }
         }
 
-        return state.isValid;
+        return state.isValid = allFiltersValid;
     };
 
     return {
