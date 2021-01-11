@@ -47,7 +47,7 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 Run `nx serve advanced-search` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-#### Things to add later when time permits
+## Things to add later when time permits
 
 - Validation applied to each value filters rows value field. At this moment, validation is very simple, check that each value field is each filter row is not an empty string.
 - Add unit and e2e test
