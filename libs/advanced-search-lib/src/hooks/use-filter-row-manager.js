@@ -10,18 +10,6 @@ const initialState = {
     isValid: false
 };
 
-/**
- * Removes an item from an array when given an index.
- * @param {Array} filters 
- * @param {Number} index
- * @return {Array} A new array of filters without the item found at the index.
- */
-const removeFilterRowByIndex = (filters, index) => {
-    return filters.filter((item) => {
-        return item !== filters[index];
-    });
-};
-
 const filterRowDefinition = {
     id: uuidv4(),
     predicate: {
@@ -36,6 +24,18 @@ const filterRowDefinition = {
         sqlOperator: EQUALS
     },
     value: ''
+};
+
+/**
+ * Removes an item from an array when given an index.
+ * @param {Array} filters 
+ * @param {Number} index
+ * @return {Array} A new array of filters without the item found at the index.
+ */
+const removeFilterRowByIndex = (filters, index) => {
+    return filters.filter((item) => {
+        return item !== filters[index];
+    });
 };
 
 const reducer = (state, action) => {
