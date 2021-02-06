@@ -69,7 +69,7 @@ const reducer = (state, action) => {
                 ...initialState,
                 filters
             };
-        case 'predicateChanged': 
+        case 'predicateChanged':
             selectedIndex = state.filters.indexOf(action.payload.rowItem);
             selectedRowItem = state.filters[selectedIndex];
             selectedRowItem.predicate = { ...action.payload.predicate };

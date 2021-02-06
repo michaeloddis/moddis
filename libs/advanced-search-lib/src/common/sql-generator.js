@@ -24,7 +24,7 @@ const determineSqlStatement = (state) => {
     let select = `SELECT * FROM SESSION WHERE`;
 
     // Loop though all the filters in order to map the SQL Where clauses used by the sql statement.
-    let whereClauses = filters.map((item, index) => {
+    let whereClauses = filters.map((item) => {
         const {
             predicate: {
                 value: column
@@ -36,7 +36,6 @@ const determineSqlStatement = (state) => {
         } = item;
 
         let whereClause = ``;
-
 
         switch (sqlOperator) {
             case GREATER_THEN:
