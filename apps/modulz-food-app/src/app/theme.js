@@ -6,7 +6,8 @@ const theme = {
         gray: '#ccc',
         lightGray: '#ddd',
         darkGray: '#666',
-        green: 'green'
+        green: '#44BD61',
+        lightGreen: 'lightGreen'
     },
     space: [0, 4, 8, 16, 32, 64],
     fontSizes: [12, 14, 16, 20, 24, 32],
