@@ -14,10 +14,15 @@ const foodData = {
       isDelicious: false,
       isHealthy: true,
     },
-  }
+}
 
-  const foodDataProvider = Object.values(foodData);
+// Map the foodData to an array by getting the value ojects and mapping a new object which contains an id based on the index of foodData keys.
+const foodDataItems = Object.values(foodData).map((item, index) => {
+    return { ...item, id: Object.keys(foodData)[index] }
+});
 
-  export {
+const foodDataProvider = foodDataItems;
+
+export {
     foodDataProvider
-  };
+};

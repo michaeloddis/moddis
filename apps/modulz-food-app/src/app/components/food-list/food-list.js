@@ -5,7 +5,6 @@ import { Flex } from '../layout';
 import FoodListItem from './food-list-item';
 import { Checkbox } from '../checkbox';
 import { Text } from '../text';
-import { v4 as uuidv4 } from 'uuid';
 
 const FoodList = (props) => {
     const {
@@ -26,22 +25,20 @@ const FoodList = (props) => {
         const foodItems = items || [];
 
         return foodItems.map((item, index) => {
-            let id = uuidv4();
-    
             return (
                 <FoodListItem
                     paddingLeft={determineFoodItemPadding(item)}
                     backgroundColor={determineFoodItemBackgroundColor(item)}
                     key={index}>
                     <Checkbox 
-                        id={`deliciousCheckbox-${id}`}
+                        id={`deliciousCheckbox-${item.id}`}
                         name='Delicious'
                         value={item.isDelicious.toString()}
                         isChecked={item.isDelicious}
                         labelColor={determineFoodItemLabelColor(item)}
                         onChange={(checked) => onDeliciousCheckboxClicked(checked, index)} />
                     <Checkbox
-                        id={`healthlyCheckbox-${id}`}
+                        id={`healthlyCheckbox-${item.id}`}
                         name='Healthy'
                         value={item.isHealthy.toString()}
                         isChecked={item.isHealthy}
