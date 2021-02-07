@@ -2,7 +2,10 @@
 
 ## About Project
 
-A small application that displays a list of healthy and delicious foods. You can select which foods are delicious and/or healthy to eat using checkboxes. Delicious foods are indented when their checkboxs are checked and the background color for healthy foods are turned green when their checkboxes are checked.
+A small application that displays a list of foods. You can select which foods are delicious and/or healthy to eat using checkboxes. 
+- When 'Delicious' is checked the food row is indented.
+- When 'Healthy' is checked, the background color turns green.
+- When both 'Delicious' and 'Healthy' are checked, the food row is indented and its background color turns green.
 
 ### Key Libraries Used
 
