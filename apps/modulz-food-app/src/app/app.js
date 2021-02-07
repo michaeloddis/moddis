@@ -27,7 +27,7 @@ export const App = () => {
                     onHealthyCheckboxClicked={healthyClicked} />
                 <FoodAppDataOutput output={state.generatedOutput} />
                 <FoodAppFooter>
-                    <button onClick={generateOutput}>Generate Raw Data</button>
+                    <button onClick={generateOutput}>Generate Output</button>
                 </FoodAppFooter>
             </FoodAppContainer>
         </ThemeProvider>
