@@ -27,6 +27,7 @@
   "private": true,
   "dependencies": {
     "@byteclaw/use-unique-id": "^1.0.1",
+    "@styled-system/prop-types": "^5.1.5",
     "document-register-element": "1.13.1",
     "lodash": "^4.17.20",
     "react": "16.13.1",
@@ -35,6 +36,7 @@
     "react-is": "16.13.1",
     "react-router-dom": "5.2.0",
     "styled-components": "5.1.1",
+    "styled-system": "^5.1.5",
     "use-unique-id": "^1.0.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.6"

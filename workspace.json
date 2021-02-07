@@ -235,6 +235,79 @@
           }
         }
       }
+    },
+    "modulz-food-app": {
+      "root": "apps/modulz-food-app",
+      "sourceRoot": "apps/modulz-food-app/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/modulz-food-app",
+            "index": "apps/modulz-food-app/src/index.html",
+            "main": "apps/modulz-food-app/src/main.js",
+            "polyfills": "apps/modulz-food-app/src/polyfills.js",
+            "tsConfig": "apps/modulz-food-app/tsconfig.app.json",
+            "assets": [
+              "apps/modulz-food-app/src/favicon.ico",
+              "apps/modulz-food-app/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/modulz-food-app/src/environments/environment.js",
+                  "with": "apps/modulz-food-app/src/environments/environment.prod.js"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "modulz-food-app:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "modulz-food-app:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/modulz-food-app/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/modulz-food-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
