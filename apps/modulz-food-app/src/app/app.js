@@ -18,6 +18,11 @@ export const App = () => {
         foodItems: foodDataProvider
     });
 
+    const generateOutputHandler = () => {
+        generateOutput();
+        console.log(state.foodItems);
+    }
+
     return (
         <ThemeProvider theme={theme}>
             <FoodAppContainer>
@@ -27,7 +32,7 @@ export const App = () => {
                     onHealthyCheckboxClicked={healthyClicked} />
                 <FoodAppDataOutput output={state.generatedOutput} />
                 <FoodAppFooter>
-                    <button onClick={generateOutput}>Generate Output</button>
+                    <button onClick={generateOutputHandler}>Generate Output</button>
                 </FoodAppFooter>
             </FoodAppContainer>
         </ThemeProvider>
