@@ -5,6 +5,7 @@ const theme = {
         white: '#fff',
         gray: '#ccc',
         lightGray: '#ddd',
+        darkGray: '#666',
         green: 'green'
     },
     space: [0, 4, 8, 16, 32, 64],

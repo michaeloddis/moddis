@@ -49,18 +49,12 @@ const generateOutput = (state) => {
 const useFoodAppManager = ({
     foodItems
 }) => {
-
-    console.log('foodItems', foodItems);
-
     const [state, dispatch] = useReducer(reducer, {
         ...initialState,
         foodItems
     });
     
     const deliciousClicked = (checked, index) => {
-        console.log('checked', checked);
-        console.log('item', index);
-
         dispatch({
             type: 'delicious',
             payload: {
@@ -71,9 +65,6 @@ const useFoodAppManager = ({
     };
 
     const healthyClicked = (checked, index) => {
-        console.log('checked', checked);
-        console.log('item', index);
-        
         dispatch({
             type: 'healthy',
             payload: {

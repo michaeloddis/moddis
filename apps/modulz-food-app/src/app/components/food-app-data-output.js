@@ -4,8 +4,8 @@ import styled, { withTheme } from 'styled-components';
 import { Flex } from './layout';
 
 const Container = styled(Flex)`
-    border: solid 1px #cccccc;
-    background-color: #ffffff;
+    border: solid 1px ${props => props.theme.colors.gray};
+    background-color: ${props => props.theme.colors.white};
     border-radius: 4px;
     font-size: 16px;
     margin-top: 8px;
@@ -14,7 +14,7 @@ const Container = styled(Flex)`
 `;
 
 const Output = styled.p`
-    color: #666666;
+    color: ${props => props.theme.colors.darkGray};
     font-size: 14px;
     font-style: italic;
     text-align: center;
